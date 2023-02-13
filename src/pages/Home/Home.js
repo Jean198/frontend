@@ -11,7 +11,7 @@ const Home = () => {
           <h2>Inventory App</h2>
           <ul>
             <li>
-              <Link to='/login' className='navlink'>
+              <Link to='/dashboard' className='navlink'>
                 Dashboard
               </Link>
             </li>

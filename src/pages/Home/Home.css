@@ -1,0 +1,46 @@
+.home {
+  min-height: 100vh;
+  background-color: #005971;
+}
+nav {
+  display: flex; /* 1 */
+  justify-content: space-between; /* 2 */
+  padding: 1rem 2rem; /* 3 */
+}
+
+nav h2 {
+  color: white;
+  letter-spacing: 2px;
+}
+nav ul {
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+nav li {
+  padding-left: 1rem;
+}
+
+.navlink {
+  text-decoration: none;
+  color: white;
+  letter-spacing: 2px;
+}
+
+@media only screen and (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  nav ul {
+    flex-direction: column;
+    padding-top: 0.5rem;
+  }
+  nav li {
+    padding: 0.5rem 0;
+  }
+}

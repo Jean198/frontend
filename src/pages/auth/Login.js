@@ -18,6 +18,9 @@ const Login = () => {
             <p class='message'>
               Forgot password? <Link to='/forgot'>Click here</Link>
             </p>
+            <p class='message'>
+              Back to <Link to='/'>Homepage</Link>
+            </p>
           </form>
         </div>
       </div>

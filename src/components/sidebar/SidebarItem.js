@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import * as MaterialDesign from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const SidebarItem = ({ item }) => {
-  const [isAccountOpen, setIsAccountOpen] = useState(true);
-  console.log(isAccountOpen);
+  const [isAccountOpen, setIsAccountOpen] = useState(false);
 
   return (
     <>
@@ -12,26 +12,31 @@ const SidebarItem = ({ item }) => {
         onClick={() => setIsAccountOpen(!isAccountOpen)}
       >
         <span className='menu-icon'>{item.icon}</span>
-        <h5 className='menu-item-title'>{item.title} </h5>
+        <Link to={item.path} className='menu-item-title'>
+          {item.title}
+        </Link>
         {item.title === 'Account' &&
           (isAccountOpen === true ? (
             <>
-              <h5 className='expand-sign'>
-                <MaterialDesign.MdExpandLess />
-              </h5>
+              <MaterialDesign.MdExpandLess size={25} />
 
               <div>
                 <ul>
                   {item.childrens.map((child) => (
-                    <li className='child-title'>{child.title}</li>
+                    <li className='child-title'>
+                      <h6>
+                        {' '}
+                        <Link to={child.path} className='link'>
+                          {child.title}
+                        </Link>
+                      </h6>
+                    </li>
                   ))}
                 </ul>
               </div>
             </>
           ) : (
-            <h5 className='expand-sign'>
-              <MaterialDesign.MdExpandMore />
-            </h5>
+            <MaterialDesign.MdExpandMore size={25} />
           ))}
       </div>
     </>

@@ -56,17 +56,28 @@
 
 .menu-item-title {
   display: inline;
+  text-decoration: none;
+  color: black;
+  font-size: 1rem;
 }
 
-.expand-sign {
-  margin-left: 0rem;
-  display: inline !important;
+.menu-item-title:hover {
+  color: white;
 }
 
 .child-title {
-  padding: 5px 5px;
+  padding: 2px 5px;
+  text-decoration: none;
+  transition: 0.5s ease-in;
+  margin-top: 10px !important;
 }
 
-.child-title:hover {
-  background-color: lightgray;
+.link {
+  text-decoration: none;
+  color: black;
+  transition: 0.6s ease;
+}
+
+.link:hover {
+  color: white;
 }

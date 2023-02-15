@@ -5,3 +5,7 @@
   right: 0;
   height: 100vh;
 }
+
+.layout-children-container {
+  height: 80vh;
+}

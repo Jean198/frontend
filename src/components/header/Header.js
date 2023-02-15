@@ -16,7 +16,6 @@ const Header = () => {
           <button className='btn btn-danger '>Logout</button>
         </div>
       </div>
-      <hr />
     </>
   );
 };

@@ -4,14 +4,69 @@
 
 .sidebar {
   position: fixed;
-  border: solid 1px black;
   top: 0;
   left: 0;
   width: 20%;
   height: 100vh;
   flex-shrink: 0;
-  background-color: var(--color-white);
+  background-color: lightgray;
   overflow: auto;
   color: var(-color-dark);
   transition: all 0.5s;
+}
+
+.sidebar-header {
+  background-color: #005971;
+  color: white;
+  padding: 10px 15px;
+  text-align: left;
+}
+
+.menu-container {
+  margin-top: 2rem;
+}
+
+.menu-item-container {
+  padding: 0 15px;
+  margin-top: 1rem;
+  /*display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  */
+  transition: 0.5s;
+}
+
+.menu-item-container:hover {
+  background-color: #005971;
+  color: white;
+  cursor: pointer;
+}
+.menu-item-container ul {
+  padding-bottom: 1rem;
+  margin-bottom: 10px;
+}
+
+.menu-item-container ul li {
+  list-style: none;
+}
+
+.menu-icon {
+  margin-right: 1rem;
+}
+
+.menu-item-title {
+  display: inline;
+}
+
+.expand-sign {
+  margin-left: 0rem;
+  display: inline !important;
+}
+
+.child-title {
+  padding: 5px 5px;
+}
+
+.child-title:hover {
+  background-color: lightgray;
 }

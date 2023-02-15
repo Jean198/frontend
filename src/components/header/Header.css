@@ -1,8 +1,8 @@
 .header-container {
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  padding: 10px 15px;
   align-items: center;
   display: flex;
-  margin: 0 auto;
-  margin-top: 2rem;
+  border-bottom: 1px solid lightgray;
 }

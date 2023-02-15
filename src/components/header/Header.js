@@ -1,14 +1,23 @@
 import React from 'react';
+import './Header.css';
 
 const Header = () => {
   return (
-    <div className='row'>
-      <h3 className='col-lg-6'>
-        <span>Welcome,</span>
-        <span className='text-success'>Jean</span>
-      </h3>
-      <button className='btn btn-danger col-lg-6'>Logout</button>
-    </div>
+    <>
+      <div className=' header-container'>
+        <div>
+          <h3 className=''>
+            <span>Welcome, </span>
+            <span className='text-danger'>Jean</span>
+          </h3>
+        </div>
+
+        <div className=''>
+          <button className='btn btn-danger '>Logout</button>
+        </div>
+      </div>
+      <hr />
+    </>
   );
 };
 

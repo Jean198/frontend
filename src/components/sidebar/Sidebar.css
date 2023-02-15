@@ -1,0 +1,17 @@
+.layout {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  border: solid 1px black;
+  top: 0;
+  left: 0;
+  width: 20%;
+  height: 100vh;
+  flex-shrink: 0;
+  background-color: var(--color-white);
+  overflow: auto;
+  color: var(-color-dark);
+  transition: all 0.5s;
+}

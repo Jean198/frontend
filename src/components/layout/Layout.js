@@ -1,15 +1,12 @@
 import React from 'react';
-import Header from '../header/Header';
-import Footer from '../footer/Footer';
-import './Layout.css';
+import Sidebar from '../sidebar/Sidebar';
 
-const Layout = () => {
+const Layout = ({ children }) => {
   return (
-    <>
-      <Header />
-      <div className='layout-children-container'></div>
-      <Footer />
-    </>
+    <div className='d-flex'>
+      <Sidebar />
+      {children}
+    </div>
   );
 };
 

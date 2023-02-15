@@ -1,0 +1,8 @@
+.main {
+  width: 80%;
+  color: #ccc;
+  border: solid 1px red;
+  position: fixed;
+  right: 0;
+  height: 100vh;
+}

@@ -1,15 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Login.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { validateEmail } from '../../services/authService';
+import { loginUser } from '../../services/authService';
+import { setLogin, setName } from '../../redux/features/auth/authSlice';
+const initialState = {
+  email: '',
+  password: '',
+};
+
+const toastPosition = {
+  position: toast.POSITION.TOP_CENTER,
+};
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState(initialState);
+  const { email, password } = formData;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const login = async (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      return toast.error('All fields are required', toastPosition);
+    }
+
+    if (!validateEmail(email)) {
+      return toast.error('Please enter a valid email', toastPosition);
+    }
+
+    const userData = {
+      email,
+      password,
+    };
+
+    setIsLoading(true);
+
+    const data = await loginUser(userData);
+    console.log(data);
+    await dispatch(setLogin(true));
+    await dispatch(setName(data.name));
+    navigate('/dashboard');
+    setIsLoading(false);
+  };
+
   return (
     <>
       <div className='form-container'>
         <div class='auth-form'>
-          <form>
-            <input type='text' placeholder='Name' name='name' />
-            <input type='email' placeholder='Email' name='email' />
+          <form onSubmit={login}>
+            <input
+              type='text'
+              placeholder='Email'
+              name='email'
+              value={email}
+              onChange={handleInputChange}
+            />
+            <input
+              type='password'
+              placeholder='Password'
+              name='password'
+              value={password}
+              onChange={handleInputChange}
+            />
             <button>Login</button>
 
             <p class='message'>

@@ -3,7 +3,14 @@ import { toast } from 'react-toastify';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-const registerUser = async (userData) => {
+export const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+
+//Register User
+export const registerUser = async (userData) => {
   try {
     const response = await axios.post(
       `${BACKEND_URL}/api/users/register`,
@@ -13,7 +20,9 @@ const registerUser = async (userData) => {
       }
     );
 
-    if (response.statusText === 'ok') {
+    //console.log(response.statusText);
+
+    if (response.statusText === 'Created') {
       toast.success('User Registered Successfully', {
         position: toast.POSITION.TOP_CENTER,
       });
@@ -26,6 +35,40 @@ const registerUser = async (userData) => {
       error.message ||
       error.toString();
 
-    toast.error(message);
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  }
+};
+
+//Login User
+export const loginUser = async (userData) => {
+  try {
+    const response = await axios.post(
+      `${BACKEND_URL}/api/users/login`,
+      userData,
+      {
+        withCredentials: true,
+      }
+    );
+
+    console.log(response.statusText);
+
+    if (response.statusText === 'ok') {
+      toast.success('Login successful!', {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+
+    return response.data;
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+
+    toast.error(message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
   }
 };

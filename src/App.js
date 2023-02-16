@@ -17,7 +17,7 @@ axios.defaults.withCredentials = true; //WithCredentials helps to get credential
 function App() {
   return (
     <BrowserRouter>
-      <BrowserRouter />
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />

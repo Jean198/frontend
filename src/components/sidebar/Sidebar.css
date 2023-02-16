@@ -16,10 +16,20 @@
 }
 
 .sidebar-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between !important;
+  align-items: center;
   background-color: #005971;
   color: white;
   padding: 10px 15px;
   text-align: left;
+}
+.home-icon {
+  cursor: pointer;
+}
+.sidebar-header h3 {
+  display: inline;
 }
 
 .menu-container {

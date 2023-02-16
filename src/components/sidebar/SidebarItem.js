@@ -11,8 +11,8 @@ const SidebarItem = ({ item }) => {
         className='menu-item-container'
         onClick={() => setIsAccountOpen(!isAccountOpen)}
       >
-        <span className='menu-icon'>{item.icon}</span>
         <Link to={item.path} className='menu-item-title'>
+          <span className='menu-icon'>{item.icon}</span>
           {item.title}
         </Link>
         {item.title === 'Account' &&
@@ -27,7 +27,7 @@ const SidebarItem = ({ item }) => {
                       <h6>
                         {' '}
                         <Link to={child.path} className='link'>
-                          {child.title}
+                          <div>{child.title}</div>
                         </Link>
                       </h6>
                     </li>

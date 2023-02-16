@@ -8,10 +8,16 @@ import Home from './pages/Home/Home';
 import Dashboard from './components/Dashboard/Dashboard';
 import Layout from './components/layout/Layout';
 import Profile from './pages/profile/Profile';
+import axios from 'axios';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 
 function App() {
   return (
     <BrowserRouter>
+      <BrowserRouter />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />

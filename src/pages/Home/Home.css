@@ -68,3 +68,15 @@ nav li {
     padding-left: 0;
   }
 }
+
+.userPhoto {
+  border: solid 1px white;
+  width: 20px;
+  height: 20px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -48,10 +48,11 @@ const Login = () => {
     setIsLoading(true);
 
     const data = await loginUser(userData);
-    console.log(data);
-    await dispatch(setLogin(true));
+    await dispatch(
+      setLogin({ isLoggedIn: true, username: data.user, userPhoto: data.photo })
+    );
     await dispatch(setName(data.name));
-    navigate('/dashboard');
+    await navigate('/dashboard');
     setIsLoading(false);
   };
 

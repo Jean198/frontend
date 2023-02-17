@@ -8,6 +8,9 @@ import { selectUserInfo } from '../../redux/features/auth/authSlice';
 
 const Home = () => {
   const { isLoggedIn } = useSelector(selectUserInfo);
+  const { name } = useSelector(selectUserInfo);
+  const userInfo = useSelector(selectUserInfo);
+
   return (
     <div className='home'>
       <div className='container'>
@@ -26,6 +29,17 @@ const Home = () => {
                 Register
               </Link>
             </li>
+
+            {isLoggedIn && (
+              <li className='profileInfo'>
+                <h6>{name}</h6>
+                <img
+                  src={userInfo.user.photo}
+                  alt='userphoto'
+                  className='userPhoto'
+                />
+              </li>
+            )}
 
             {!isLoggedIn && (
               <li>

@@ -3,28 +3,37 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 import homeImage from '../../assets/images/home-page.webp';
 
+import { useSelector } from 'react-redux';
+import { selectUserInfo } from '../../redux/features/auth/authSlice';
+
 const Home = () => {
+  const { isLoggedIn } = useSelector(selectUserInfo);
   return (
     <div className='home'>
       <div className='container'>
         <nav>
           <h2>Inventory App</h2>
           <ul>
-            <li>
-              <Link to='/dashboard' className='navlink'>
-                Dashboard
-              </Link>
-            </li>
+            {isLoggedIn && (
+              <li>
+                <Link to='/dashboard' className='navlink'>
+                  Dashboard
+                </Link>
+              </li>
+            )}
             <li>
               <Link to='/register' className='navlink'>
                 Register
               </Link>
             </li>
-            <li>
-              <Link to='/login' className='navlink'>
-                Login
-              </Link>
-            </li>
+
+            {!isLoggedIn && (
+              <li>
+                <Link to='/login' className='navlink'>
+                  Login
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>

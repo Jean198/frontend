@@ -25,10 +25,12 @@ function App() {
       <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />
+
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+
         <Route path='/forgot' element={<Forgot />} />
-        <Route path='/resetpassword/:resettoken' element={<Reset />} />
+        <Route path='/resetpassword/:resetToken' element={<Reset />} />
 
         {isLoggedIn === true ? ( //Protecting route
           <Route

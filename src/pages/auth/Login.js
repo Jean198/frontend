@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { validateEmail } from '../../services/authService';
 import { loginUser } from '../../services/authService';
 import { setLogin, setName } from '../../redux/features/auth/authSlice';
+import Loader from '../../components/loader/Loader';
 const initialState = {
   email: '',
   password: '',
@@ -14,6 +15,7 @@ const initialState = {
 
 const toastPosition = {
   position: toast.POSITION.TOP_CENTER,
+  autoClose: 2000,
 };
 
 const Login = () => {
@@ -56,6 +58,7 @@ const Login = () => {
   return (
     <>
       <div className='form-container'>
+        {isLoading && <Loader />}
         <div class='auth-form'>
           <form onSubmit={login}>
             <input

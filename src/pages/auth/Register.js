@@ -14,6 +14,7 @@ const initialState = {
 
 const toastPosition = {
   position: toast.POSITION.TOP_CENTER,
+  autoClose: 2000,
 };
 
 const Register = () => {

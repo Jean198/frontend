@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { selectUserInfo } from './redux/features/auth/authSlice';
 import Main from './components/main/Main';
 import Forgot from './pages/auth/Forgot';
 import Login from './pages/auth/Login';
@@ -11,10 +12,14 @@ import Profile from './pages/profile/Profile';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 
 function App() {
+  const { isLoggedIn } = useSelector(selectUserInfo);
+  console.log(isLoggedIn);
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -25,16 +30,20 @@ function App() {
         <Route path='/forgot' element={<Forgot />} />
         <Route path='/resetpassword/:resettoken' element={<Reset />} />
 
-        <Route
-          path='/dashboard'
-          element={
-            <Layout>
-              <Main>
-                <Dashboard />
-              </Main>
-            </Layout>
-          }
-        />
+        {isLoggedIn === true ? (
+          <Route
+            path='/dashboard'
+            element={
+              <Layout>
+                <Main>
+                  <Dashboard />
+                </Main>
+              </Layout>
+            }
+          />
+        ) : (
+          <Route path='/dashboard' element={<Login />} />
+        )}
 
         <Route
           path='/profile'

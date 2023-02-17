@@ -30,7 +30,7 @@ function App() {
         <Route path='/forgot' element={<Forgot />} />
         <Route path='/resetpassword/:resettoken' element={<Reset />} />
 
-        {isLoggedIn === true ? (
+        {isLoggedIn === true ? ( //Protecting route
           <Route
             path='/dashboard'
             element={

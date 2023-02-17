@@ -15,9 +15,7 @@ export const registerUser = async (userData) => {
     const response = await axios.post(
       `${BACKEND_URL}/api/users/register`,
       userData,
-      {
-        withCredentials: true,
-      }
+      { withCredentials: true }
     );
 
     //console.log(response.statusText);
@@ -54,7 +52,7 @@ export const loginUser = async (userData) => {
 
     console.log(response.statusText);
 
-    if (response.statusText === 'ok') {
+    if (response.statusText === 'OK') {
       toast.success('Login successful!', {
         position: toast.POSITION.TOP_CENTER,
       });

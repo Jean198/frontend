@@ -15,7 +15,12 @@ const Home = () => {
     <div className='home'>
       <div className='container'>
         <nav>
-          <h2>Inventory App</h2>
+          <div className='logo-container'>
+            <p>
+              <h2>WMS</h2>
+              <span>Warehouse Management System</span>
+            </p>
+          </div>
           <ul>
             {isLoggedIn && (
               <li>
@@ -32,12 +37,14 @@ const Home = () => {
 
             {isLoggedIn && (
               <li className='profileInfo'>
-                <h6>{name}</h6>
-                <img
-                  src={userInfo.user.photo}
-                  alt='userphoto'
-                  className='userPhoto'
-                />
+                <div className='profileName'>{name}</div>
+                <div>
+                  <img
+                    src={userInfo.user.photo}
+                    alt='userphoto'
+                    className='userPhoto'
+                  />
+                </div>
               </li>
             )}
 
@@ -55,7 +62,7 @@ const Home = () => {
         <div className='row'>
           <div className='hero-text col-lg-6'>
             <h2>
-              Inventory {'&'} <br /> Stock Management Solution
+              Your Shop {'&'} <br /> Warehouse Management System !
             </h2>
 
             <p className='mt-4'>
@@ -65,7 +72,7 @@ const Home = () => {
             </p>
 
             <button className='btn btn-lg btn-outline-light mt-4'>
-              Free Trial 1 Month
+              Try it for free !
             </button>
           </div>
           <div className='hero-image col-lg-6'>

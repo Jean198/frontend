@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import homeImage from '../../assets/images/home-page.webp';
-
-import { useSelector } from 'react-redux';
-import { selectUserInfo } from '../../redux/features/auth/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectUserInfo, setLogin } from '../../redux/features/auth/authSlice';
+import { logoutUser } from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
   const { isLoggedIn } = useSelector(selectUserInfo);
   const { name } = useSelector(selectUserInfo);
   const userInfo = useSelector(selectUserInfo);
+  const [logoutHomeUser, setLogoutHomeUser] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    console.log('loggedout!');
+    await logoutUser();
+    dispatch(setLogin(false));
+    navigate('/');
+  };
 
   return (
     <div className='home'>
@@ -36,7 +48,11 @@ const Home = () => {
             </li>
 
             {isLoggedIn && (
-              <li className='profileInfo'>
+              <li
+                className='profileInfo'
+                onMouseOver={() => setLogoutHomeUser(true)}
+                onMouseOut={() => setLogoutHomeUser(false)}
+              >
                 <div className='profileName'>{name}</div>
                 <div>
                   <img
@@ -44,6 +60,15 @@ const Home = () => {
                     alt='userphoto'
                     className='userPhoto'
                   />
+
+                  {logoutHomeUser && (
+                    <button
+                      className='btn btn-danger logout-btn'
+                      onClick={logout}
+                    >
+                      Logout
+                    </button>
+                  )}
                 </div>
               </li>
             )}

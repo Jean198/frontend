@@ -1,18 +1,29 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const name = JSON.parse(localStorage.getItem('name'));
-const isLoggedIn = JSON.parse(localStorage.getItem('isLoggedIn'));
-const userPhoto = JSON.parse(localStorage.getItem('userPhoto'));
+let loginStatus = localStorage.getItem('isLoggedIn');
+let userImage = localStorage.getItem('userPhoto');
+let name = localStorage.getItem('name');
+
+try {
+  const isLoggedIn = JSON.parse(loginStatus);
+  const userPhoto = JSON.parse(userImage);
+  const username = JSON.parse(name);
+  loginStatus = isLoggedIn;
+  userImage = userPhoto;
+  name = username;
+} catch (err) {
+  console.log('Error: ', err.message);
+}
 
 const initialState = {
-  isLoggedIn: isLoggedIn ? isLoggedIn : false,
+  isLoggedIn: loginStatus ? loginStatus : false,
   name: name ? name : '',
   user: {
     name: '',
     email: '',
     phone: '',
     bio: '',
-    photo: userPhoto ? userPhoto : '',
+    photo: userImage ? userImage : '',
   },
 };
 
@@ -26,7 +37,7 @@ const authSlice = createSlice({
         'isLoggedIn',
         JSON.stringify(action.payload.isLoggedIn)
       );
-      localStorage.setItem('username', JSON.stringify(action.payload.username));
+      //localStorage.setItem('username', JSON.stringify(action.payload.username));
       localStorage.setItem(
         'userPhoto',
         JSON.stringify(action.payload.userPhoto)

@@ -64,6 +64,7 @@ nav li {
   border: yellow 1px solid;
   background-color: yellow;
   color: black;
+  border-radius: 6px;
 }
 
 .hero-section button:hover {

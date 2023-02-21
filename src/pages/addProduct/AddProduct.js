@@ -1,6 +1,7 @@
 import ProductForm from '../../components/product/productForm/ProductForm';
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Loader from '../../components/loader/Loader';
 import {
   createProduct,
   selectProductInfo,
@@ -66,6 +67,7 @@ const AddProduct = () => {
   return (
     <div>
       <h3>Add a new product</h3>
+      {isLoading && <Loader />}
       <ProductForm
         product={product}
         productImage={productImage}

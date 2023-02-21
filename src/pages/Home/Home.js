@@ -28,10 +28,10 @@ const Home = () => {
       <div className='container'>
         <nav>
           <div className='logo-container'>
-            <p>
+            <div>
               <h2>WMS</h2>
               <span>Warehouse Management System</span>
-            </p>
+            </div>
           </div>
           <ul>
             {isLoggedIn && (

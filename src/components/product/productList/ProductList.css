@@ -1,0 +1,30 @@
+.product-list-container {
+  width: 100%;
+  font-size: 12px;
+}
+
+.statistics-container {
+  width: 98%;
+  margin: 0 auto !important;
+  margin-top: 2rem !important;
+}
+
+.table {
+  border: solid 1px #005971;
+}
+
+.scrollable {
+  overflow: scroll;
+  position: relative;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1 !important;
+}
+
+.table-head {
+  background-color: #005971;
+  color: white;
+}

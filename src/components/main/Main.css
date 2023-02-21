@@ -1,11 +1,13 @@
 .main {
   width: 80%;
-  color: #ccc;
+  color: black;
   position: fixed;
   right: 0;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .layout-children-container {
-  height: 80vh;
+  height: 85vh;
+  overflow: scroll;
+  color: black;
 }

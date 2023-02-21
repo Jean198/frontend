@@ -1,0 +1,41 @@
+.single-stat-container {
+  display: flex;
+  font-size: 10px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+  margin: 4px auto;
+  padding-top: 5px;
+}
+
+.icon-container {
+}
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  margin-left: 1rem;
+}
+
+.total {
+  background-color: orange;
+  color: white;
+}
+
+.total-value {
+  background-color: green;
+  color: white;
+}
+
+.out-of-stock {
+  background-color: red;
+  color: white;
+}
+
+.categories {
+  background-color: #005971;
+  color: white;
+}

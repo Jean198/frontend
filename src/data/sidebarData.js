@@ -10,7 +10,7 @@ const menu = [
   {
     title: 'Add Product',
     icon: <BiImageAdd />,
-    path: '/add-product',
+    path: '/products/addproduct',
   },
   {
     title: 'Account',

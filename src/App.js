@@ -13,6 +13,7 @@ import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
+import AddProduct from './pages/addProduct/AddProduct';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 
@@ -45,6 +46,21 @@ function App() {
           />
         ) : (
           <Route path='/dashboard' element={<Login />} />
+        )}
+
+        {isLoggedIn === true ? ( //Protecting route
+          <Route
+            path='/products/addproduct'
+            element={
+              <Layout>
+                <Main>
+                  <AddProduct />
+                </Main>
+              </Layout>
+            }
+          />
+        ) : (
+          <Route path='/products/addproduct' element={<Login />} />
         )}
 
         <Route

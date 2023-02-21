@@ -3,8 +3,7 @@
   background-color: #005971;
 }
 
-.home h2,
-p {
+.home h2 {
   color: white;
 }
 
@@ -25,7 +24,7 @@ nav h2 {
   line-height: 0cm;
 }
 
-.logo-container p span {
+.logo-container div span {
   color: lightgreen;
   font-size: 0.8rem;
   margin-left: 0.2rem;

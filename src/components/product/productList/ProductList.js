@@ -1,12 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductSummary from '../productSummary/ProductSummary';
 import './ProductList.css';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
 import Search from '../../search/Search';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilterProducts } from '../../../redux/features/product/filterSlice';
+import { filterProducts } from '../../../redux/features/product/filterSlice';
 
-const productList = ({ products }) => {
+const ProductList = ({ products }) => {
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
+  const { filteredProducts } = useSelector(selectFilterProducts);
+
+  const onChange = (e) => {
+    setSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
+  //Begin pagination
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 2;
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+
+    setCurrentItems(filteredProducts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(filteredProducts.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, filteredProducts]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filteredProducts.length;
+    setItemOffset(newOffset);
+  };
+
+  //End pagination
+
+  useEffect(() => {
+    dispatch(filterProducts({ products, search }));
+  }, [products, search]);
+
   return (
     <>
       <ProductSummary />
@@ -15,7 +51,7 @@ const productList = ({ products }) => {
         <div className='col-lg-6 table-title'>
           <h3>Products Table</h3>
         </div>
-        <Search />
+        <Search value={search} onChange={onChange} />
       </div>
 
       <hr />
@@ -35,8 +71,8 @@ const productList = ({ products }) => {
               </tr>
             </thead>
             <tbody>
-              {products &&
-                products.map((product, index) => {
+              {filterProducts &&
+                filteredProducts.map((product, index) => {
                   return (
                     <tr>
                       <td>{index + 1}</td>
@@ -84,4 +120,4 @@ const productList = ({ products }) => {
   );
 };
 
-export default productList;
+export default ProductList;

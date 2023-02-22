@@ -8,6 +8,7 @@ import Search from '../../search/Search';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilterProducts } from '../../../redux/features/product/filterSlice';
 import { filterProducts } from '../../../redux/features/product/filterSlice';
+import ReactPaginate from 'react-paginate';
 
 const ProductList = ({ products }) => {
   const [search, setSearch] = useState('');
@@ -71,8 +72,8 @@ const ProductList = ({ products }) => {
               </tr>
             </thead>
             <tbody>
-              {filterProducts &&
-                filteredProducts.map((product, index) => {
+              {currentItems &&
+                currentItems.map((product, index) => {
                   return (
                     <tr>
                       <td>{index + 1}</td>
@@ -115,6 +116,20 @@ const ProductList = ({ products }) => {
             </tbody>
           </table>
         </div>
+        <ReactPaginate
+          breakLabel='...'
+          nextLabel='Next'
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          pageCount={pageCount}
+          previousLabel='Prev'
+          renderOnZeroPageCount={null}
+          containerClassName='pagination'
+          pageLinkClassName='page-num'
+          previousLinkClassName='page-num'
+          nextLinkClassName='page-num'
+          activeLinkClassName='activePage'
+        />
       </div>
     </>
   );

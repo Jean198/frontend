@@ -42,3 +42,37 @@ thead {
 .table-title {
   text-align: left;
 }
+
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  font-size: 1rem;
+}
+
+.pagination .page-num {
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 3px;
+  font-weight: normal;
+  color: #333;
+  border: 1px solid #333;
+  margin: 2px;
+  text-decoration: none;
+}
+
+.pagination .page-num:hover {
+  color: orange;
+  background-color: white;
+}
+.activePage {
+  color: white !important;
+  background-color: #005971;
+  height: 100%;
+}
+
+.activePage:hover {
+  color: orange !important;
+}

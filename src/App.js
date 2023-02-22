@@ -12,14 +12,22 @@ import Profile from './pages/profile/Profile';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AddProduct from './pages/addProduct/AddProduct';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
+import { setLogin } from './redux/features/auth/authSlice';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 
 function App() {
   const { isLoggedIn } = useSelector(selectUserInfo);
-  console.log(isLoggedIn);
+  const dispatch = useDispatch();
+
+  const authToken = Cookies.get('token');
+  if (!authToken) {
+    dispatch(setLogin(false));
+  }
 
   return (
     <BrowserRouter>

@@ -1,11 +1,24 @@
 import React from 'react';
 import ProductSummary from '../productSummary/ProductSummary';
 import './ProductList.css';
+import { Link } from 'react-router-dom';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { AiOutlineEye } from 'react-icons/ai';
+import Search from '../../search/Search';
 
 const productList = ({ products }) => {
   return (
     <>
       <ProductSummary />
+      <hr />
+      <div className=' row table-title-and-search '>
+        <div className='col-lg-6 table-title'>
+          <h3>Products Table</h3>
+        </div>
+        <Search />
+      </div>
+
+      <hr />
       <div className='container product-list-container'>
         <div className='table-responsive scrollable'>
           <table className=' table'>
@@ -41,7 +54,25 @@ const productList = ({ products }) => {
                           {Number(product.price) * Number(product.quantity)}
                         </b>
                       </td>
-                      <td>{}</td>
+                      <td>
+                        <span>
+                          <Link to={``}>
+                            <AiOutlineEye size={25} color={'purple'} />
+                          </Link>
+                        </span>
+                        <span>
+                          <Link to={``}>
+                            <FaEdit size={20} color={'green'} />
+                          </Link>
+                        </span>
+                        <span>
+                          <FaTrashAlt
+                            size={20}
+                            color={'red'}
+                            cursor='pointer'
+                          />
+                        </span>
+                      </td>
                     </tr>
                   );
                 })}

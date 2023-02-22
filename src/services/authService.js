@@ -51,12 +51,14 @@ export const loginUser = async (userData) => {
     );
 
     console.log(response.statusText);
-
+    /*
     if (response.statusText === 'OK') {
       toast.success('Login successful!', {
         position: toast.POSITION.TOP_CENTER,
       });
     }
+
+    */
 
     return response.data;
   } catch (error) {

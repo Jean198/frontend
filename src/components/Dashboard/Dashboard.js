@@ -12,7 +12,6 @@ import ProductList from '../product/productList/ProductList';
 const Dashboard = () => {
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector(selectUserInfo);
-  console.log(isLoggedIn);
   const { products, isLoading, isError, message } =
     useSelector(selectProductInfo);
 
@@ -20,8 +19,6 @@ const Dashboard = () => {
     if (isLoggedIn === true) {
       dispatch(getProducts());
     }
-
-    console.log(products);
   }, [isLoggedIn, isError, message, dispatch]);
 
   return (

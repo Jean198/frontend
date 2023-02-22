@@ -7,7 +7,7 @@ import { selectUserInfo, setLogin } from '../../redux/features/auth/authSlice';
 import { logoutUser } from '../../services/authService';
 import { useNavigate } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ authToken }) => {
   const { isLoggedIn } = useSelector(selectUserInfo);
   const { name } = useSelector(selectUserInfo);
   const userInfo = useSelector(selectUserInfo);
@@ -22,6 +22,8 @@ const Home = () => {
     dispatch(setLogin(false));
     navigate('/');
   };
+
+  console.log(authToken);
 
   return (
     <div className='home'>
@@ -47,7 +49,7 @@ const Home = () => {
               </Link>
             </li>
 
-            {isLoggedIn && (
+            {isLoggedIn && authToken && (
               <li
                 className='profileInfo'
                 onMouseOver={() => setLogoutHomeUser(true)}

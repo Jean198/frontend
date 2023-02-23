@@ -55,6 +55,26 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// Delete a product
+export const deleteProduct = createAsyncThunk(
+  'products/delete',
+  async (id, thunkAPI) => {
+    // I am not sending any data
+    try {
+      return await productService.deleteProduct(id);
+    } catch (error) {
+      window.location.reload(true);
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      //return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //------------------------------------------------------------------------------------------------------------
 
 const productSlice = createSlice({
@@ -144,6 +164,26 @@ const productSlice = createSlice({
         state.products = action.payload;
       })
       .addCase(getProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+
+      .addCase(deleteProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success('product deleted successfully!', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

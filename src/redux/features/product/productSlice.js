@@ -44,13 +44,15 @@ export const getProducts = createAsyncThunk(
       return await productService.getProducts();
     } catch (error) {
       window.location.reload(true);
+      /*
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
         error.toString();
-      //return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(message);
+      */
     }
   }
 );
@@ -64,13 +66,15 @@ export const deleteProduct = createAsyncThunk(
       return await productService.deleteProduct(id);
     } catch (error) {
       window.location.reload(true);
+      /*
       const message =
         (error.response &&
           error.response.data &&
           error.response.data.message) ||
         error.message ||
         error.toString();
-      //return thunkAPI.rejectWithValue(message);
+      return thunkAPI.rejectWithValue(message);
+      */
     }
   }
 );
@@ -87,7 +91,7 @@ const productSlice = createSlice({
 
       products.map((product) => {
         const { price, quantity } = product;
-        const productValue = Number(price) * Number(quantity);
+        const productValue = parseFloat(price) * parseFloat(quantity);
         return valuesArray.push(productValue);
       });
 
@@ -179,7 +183,7 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success('product deleted successfully!', {
+        toast.success('product deleted successfully !', {
           position: toast.POSITION.TOP_CENTER,
         });
       })

@@ -4,16 +4,26 @@ import './ProductList.css';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AiOutlineEye } from 'react-icons/ai';
+import { CgTrashEmpty } from 'react-icons/cg';
 import Search from '../../search/Search';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilterProducts } from '../../../redux/features/product/filterSlice';
 import { filterProducts } from '../../../redux/features/product/filterSlice';
 import ReactPaginate from 'react-paginate';
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import {
+  deleteProduct,
+  getProducts,
+} from '../../../redux/features/product/productSlice';
+import { useNavigate } from 'react-router-dom';
+import Loader from '../../loader/Loader';
 
-const ProductList = ({ products }) => {
+const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const { filteredProducts } = useSelector(selectFilterProducts);
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -24,7 +34,7 @@ const ProductList = ({ products }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 2;
+  const itemsPerPage = 3;
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -38,11 +48,36 @@ const ProductList = ({ products }) => {
     setItemOffset(newOffset);
   };
 
+  //Delete product action
+
+  const delProduct = (id) => {
+    dispatch(deleteProduct(id));
+    dispatch(getProducts());
+    window.location.reload(true);
+  };
+
+  //Delete product popup
+  const confirmDelete = (id) => {
+    confirmAlert({
+      title: 'Delete',
+      message: 'Are you sure to delete this product',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => delProduct(id),
+        },
+        {
+          label: 'No',
+        },
+      ],
+    });
+  };
+
   //End pagination
 
   useEffect(() => {
     dispatch(filterProducts({ products, search }));
-  }, [products, search]);
+  }, [dispatch, products, search, getProducts]);
 
   return (
     <>
@@ -56,64 +91,77 @@ const ProductList = ({ products }) => {
       </div>
 
       <hr />
+
+      {isLoading && <Loader />}
       <div className='container product-list-container'>
         <div className='table-responsive scrollable'>
-          <table className=' table'>
-            <thead className='table-head '>
-              <tr>
-                <th scope='col'>Index</th>
-                <th scope='col'>SN</th>
-                <th scope='col'>Name</th>
-                <th scope='col'>Category</th>
-                <th scope='col'>Price</th>
-                <th scope='col'>Quantity</th>
-                <th scope='col'>Value</th>
-                <th scope='col'>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentItems &&
-                currentItems.map((product, index) => {
-                  return (
-                    <tr>
-                      <td>{index + 1}</td>
-                      <th scope='col'>{product.sku}</th>
-                      <td>{product.name}</td>
-                      <td>{product.category}</td>
-                      <td>
-                        <b>{product.price}</b> €
-                      </td>
-                      <td>{product.quantity}</td>
-                      <td>
-                        <b>
-                          {Number(product.price) * Number(product.quantity)}
-                        </b>{' '}
-                        €{' '}
-                      </td>
-                      <td>
-                        <span>
-                          <Link to={``}>
-                            <AiOutlineEye size={25} color={'purple'} />
-                          </Link>
-                        </span>
-                        <span>
-                          <Link to={``}>
-                            <FaEdit size={20} color={'green'} />
-                          </Link>
-                        </span>
-                        <span>
-                          <FaTrashAlt
-                            size={20}
-                            color={'red'}
-                            cursor='pointer'
-                          />
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
+          {!isLoading && products.length === 0 ? (
+            <div className='no-products-div'>
+              <p>
+                No product found! Please add a product{' '}
+                <CgTrashEmpty color='red' />
+              </p>
+            </div>
+          ) : (
+            <table className=' table'>
+              <thead className='table-head '>
+                <tr>
+                  <th scope='col'>Index</th>
+                  <th scope='col'>SN</th>
+                  <th scope='col'>Name</th>
+                  <th scope='col'>Category</th>
+                  <th scope='col'>Price</th>
+                  <th scope='col'>Quantity</th>
+                  <th scope='col'>Value</th>
+                  <th scope='col'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {currentItems &&
+                  currentItems.map((product, index) => {
+                    return (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <th scope='col'>{product.sku}</th>
+                        <td>{product.name}</td>
+                        <td>{product.category}</td>
+                        <td>
+                          <b>{product.price}</b> €
+                        </td>
+                        <td>{product.quantity}</td>
+                        <td>
+                          <b>
+                            {parseFloat(product.price) *
+                              parseFloat(product.quantity)}
+                          </b>{' '}
+                          €{' '}
+                        </td>
+                        <td>
+                          <span>
+                            <Link to={``}>
+                              <AiOutlineEye size={25} color={'purple'} />
+                            </Link>
+                          </span>
+                          <span>
+                            <Link to={``}>
+                              <FaEdit size={20} color={'green'} />
+                            </Link>
+                          </span>
+                          <span>
+                            <FaTrashAlt
+                              size={20}
+                              color={'red'}
+                              cursor='pointer'
+                              onClick={() => confirmDelete(product._id)}
+                            />
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          )}
         </div>
         <ReactPaginate
           breakLabel='...'

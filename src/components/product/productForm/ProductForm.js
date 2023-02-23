@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { Link } from 'react-router-dom';
 import './ProductForm.css';
 
 const editorStyle = {
@@ -53,7 +52,7 @@ const ProductForm = ({
               <div className='image-preview'>
                 <img
                   src={imagePreview}
-                  alt='product-image'
+                  alt='product'
                   className='product-image'
                 />
               </div>

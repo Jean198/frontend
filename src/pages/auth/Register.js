@@ -55,7 +55,7 @@ const Register = () => {
     };
 
     setIsLoading(true);
-    const data = await registerUser(userData);
+    await registerUser(userData);
     setIsLoading(false);
   };
 

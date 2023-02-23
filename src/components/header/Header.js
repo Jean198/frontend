@@ -21,7 +21,7 @@ const Header = () => {
       <div className=' header-container'>
         <div>
           <h3 className=''>
-            <span>Welcome, </span>
+            <span>User: </span>
             <span className='text-danger'>{name}</span>
           </h3>
         </div>

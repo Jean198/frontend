@@ -76,3 +76,13 @@ thead {
 .activePage:hover {
   color: orange !important;
 }
+
+.no-products-div {
+  padding-top: 3rem;
+  text-align: center;
+}
+
+.no-products-div p {
+  color: #005971;
+  font-size: 1.5rem;
+}

@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import AddProduct from './pages/addProduct/AddProduct';
 import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 import { setLogin } from './redux/features/auth/authSlice';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend

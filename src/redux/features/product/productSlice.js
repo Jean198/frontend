@@ -9,6 +9,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  totalStoreValue: 0,
+  outOfStock: 0,
+  category: [],
 };
 
 // Create New product
@@ -36,7 +39,7 @@ export const createProduct = createAsyncThunk(
 export const getProducts = createAsyncThunk(
   'products/getAll',
   async (_, thunkAPI) => {
-    // We are not sending any data
+    // I am not sending any data
     try {
       return await productService.getProducts();
     } catch (error) {
@@ -58,8 +61,20 @@ const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    calStoreValue: () => {
-      console.log('store value');
+    calcStoreValue: (state, action) => {
+      const products = action.payload;
+      const valuesArray = [];
+
+      products.map((product) => {
+        const { price, quantity } = product;
+        const productValue = Number(price) * Number(quantity);
+        return valuesArray.push(productValue);
+      });
+
+      const totalValue = valuesArray.reduce((a, b) => {
+        return a + b;
+      }, 0);
+      state.totalStoreValue = totalValue;
     },
   },
 
@@ -107,6 +122,6 @@ const productSlice = createSlice({
   },
 });
 
-export const {} = productSlice.actions;
+export const { calcStoreValue } = productSlice.actions;
 export const selectProductInfo = (store) => store.product;
 export default productSlice.reducer;

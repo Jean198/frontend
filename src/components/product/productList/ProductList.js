@@ -46,11 +46,11 @@ const ProductList = ({ products }) => {
 
   return (
     <>
-      <ProductSummary />
+      <ProductSummary products={products} />
       <hr />
       <div className=' row table-title-and-search '>
         <div className='col-lg-6 table-title'>
-          <h3>Products Table</h3>
+          <h3>All products</h3>
         </div>
         <Search value={search} onChange={onChange} />
       </div>
@@ -81,15 +81,14 @@ const ProductList = ({ products }) => {
                       <td>{product.name}</td>
                       <td>{product.category}</td>
                       <td>
-                        EUR <b>{product.price}</b>
+                        <b>{product.price}</b> €
                       </td>
                       <td>{product.quantity}</td>
                       <td>
-                        {'EUR'}
-
                         <b>
                           {Number(product.price) * Number(product.quantity)}
-                        </b>
+                        </b>{' '}
+                        €{' '}
                       </td>
                       <td>
                         <span>

@@ -5,7 +5,11 @@ import { BiCategory } from 'react-icons/bi';
 import './ProductSummary.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectProductInfo } from '../../../redux/features/product/productSlice';
-import { calcStoreValue } from '../../../redux/features/product/productSlice';
+import {
+  calcStoreValue,
+  calcOutOfStock,
+  calcCategory,
+} from '../../../redux/features/product/productSlice';
 
 export const formatNumbers = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -14,11 +18,14 @@ export const formatNumbers = (x) => {
 const ProductSummary = ({ products }) => {
   const dispatch = useDispatch();
 
-  const { totalStoreValue } = useSelector(selectProductInfo);
+  const { totalStoreValue, outOfStock, category } =
+    useSelector(selectProductInfo);
 
   useEffect(() => {
     dispatch(calcStoreValue(products));
-  });
+    dispatch(calcOutOfStock(products));
+    dispatch(calcCategory(products));
+  }, [dispatch, products]);
 
   return (
     <div className='row statistics-container'>
@@ -54,7 +61,7 @@ const ProductSummary = ({ products }) => {
           </div>
           <div className='text-container'>
             <p>
-              Total Products <br /> Value
+              Out Of Stock <br /> <span>{outOfStock}</span>
             </p>
           </div>
         </div>
@@ -66,7 +73,7 @@ const ProductSummary = ({ products }) => {
           </div>
           <div className='text-container'>
             <p>
-              Total Products <br /> Value
+              All categories in the store <br /> <span>{category.length}</span>
             </p>
           </div>
         </div>

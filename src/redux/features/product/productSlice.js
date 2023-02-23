@@ -76,6 +76,39 @@ const productSlice = createSlice({
       }, 0);
       state.totalStoreValue = totalValue;
     },
+
+    calcOutOfStock: (state, action) => {
+      const products = action.payload;
+      const quantityArray = [];
+
+      products.map((product) => {
+        const { quantity } = product;
+        return quantityArray.push(quantity);
+      });
+
+      let count = 0;
+
+      quantityArray.forEach((number) => {
+        if (Number(number) === 0) {
+          count += 1;
+        }
+      });
+
+      state.outOfStock = count;
+    },
+
+    calcCategory: (state, action) => {
+      const products = action.payload;
+      const categoryArray = [];
+
+      products.map((product) => {
+        const { category } = product;
+        return categoryArray.push(category);
+      });
+
+      const uniqueCategory = [...new Set(categoryArray)];
+      state.category = uniqueCategory;
+    },
   },
 
   extraReducers: (builder) => {
@@ -87,7 +120,6 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log(action.payload);
         state.products.push(action.payload);
         toast.success('product added successfuly!', {
           position: toast.POSITION.TOP_CENTER,
@@ -122,6 +154,7 @@ const productSlice = createSlice({
   },
 });
 
-export const { calcStoreValue } = productSlice.actions;
+export const { calcStoreValue, calcOutOfStock, calcCategory } =
+  productSlice.actions;
 export const selectProductInfo = (store) => store.product;
 export default productSlice.reducer;

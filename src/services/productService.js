@@ -18,7 +18,6 @@ const getProducts = async () => {
 };
 
 // Delete product
-
 const deleteProduct = async (id) => {
   const response = await axios.delete(`${API_URL}/deleteproduct/${id}`);
   return response.data;

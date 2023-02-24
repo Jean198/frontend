@@ -86,3 +86,7 @@ thead {
   color: #005971;
   font-size: 1.5rem;
 }
+
+.actions {
+  margin-left: 10px;
+}

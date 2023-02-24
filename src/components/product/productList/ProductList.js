@@ -16,14 +16,12 @@ import {
   deleteProduct,
   getProducts,
 } from '../../../redux/features/product/productSlice';
-import { useNavigate } from 'react-router-dom';
 import Loader from '../../loader/Loader';
 
 const ProductList = ({ products, isLoading }) => {
   const [search, setSearch] = useState('');
   const dispatch = useDispatch();
   const { filteredProducts } = useSelector(selectFilterProducts);
-  const navigate = useNavigate();
 
   const onChange = (e) => {
     setSearch(e.target.value);
@@ -77,7 +75,7 @@ const ProductList = ({ products, isLoading }) => {
 
   useEffect(() => {
     dispatch(filterProducts({ products, search }));
-  }, [dispatch, products, search, getProducts]);
+  }, [dispatch, products, search]);
 
   return (
     <>
@@ -122,7 +120,7 @@ const ProductList = ({ products, isLoading }) => {
                     return (
                       <tr>
                         <td>{index + 1}</td>
-                        <th scope='col'>{product.sku}</th>
+                        <td>{product.sku}</td>
                         <td>{product.name}</td>
                         <td>{product.category}</td>
                         <td>
@@ -138,13 +136,21 @@ const ProductList = ({ products, isLoading }) => {
                         </td>
                         <td>
                           <span>
-                            <Link to={``}>
-                              <AiOutlineEye size={25} color={'purple'} />
+                            <Link to={`/products/${product._id}`}>
+                              <AiOutlineEye
+                                size={25}
+                                color={'purple'}
+                                className='actions'
+                              />
                             </Link>
                           </span>
                           <span>
                             <Link to={``}>
-                              <FaEdit size={20} color={'green'} />
+                              <FaEdit
+                                size={20}
+                                color={'green'}
+                                className='actions'
+                              />
                             </Link>
                           </span>
                           <span>
@@ -153,6 +159,7 @@ const ProductList = ({ products, isLoading }) => {
                               color={'red'}
                               cursor='pointer'
                               onClick={() => confirmDelete(product._id)}
+                              className='actions'
                             />
                           </span>
                         </td>

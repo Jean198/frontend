@@ -57,6 +57,44 @@ export const getProducts = createAsyncThunk(
   }
 );
 
+// get a single a product
+export const getProduct = createAsyncThunk(
+  'products/getProduct',
+  async (id, thunkAPI) => {
+    // I am not sending any data
+    try {
+      return await productService.getProduct(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Update a single product
+export const updateProduct = createAsyncThunk(
+  'products/updateProduct',
+  async ({ id, formData }, thunkAPI) => {
+    // I am not sending any data
+    try {
+      return await productService.updateProduct(id, formData);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Delete a product
 export const deleteProduct = createAsyncThunk(
   'products/delete',
@@ -65,8 +103,6 @@ export const deleteProduct = createAsyncThunk(
     try {
       return await productService.deleteProduct(id);
     } catch (error) {
-      window.location.reload(true);
-      /*
       const message =
         (error.response &&
           error.response.data &&
@@ -74,7 +110,6 @@ export const deleteProduct = createAsyncThunk(
         error.message ||
         error.toString();
       return thunkAPI.rejectWithValue(message);
-      */
     }
   }
 );
@@ -194,6 +229,42 @@ const productSlice = createSlice({
         toast.error(action.payload, {
           position: toast.POSITION.TOP_CENTER,
         });
+      })
+
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.product = action.payload;
+      })
+      .addCase(getProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        toast.success('Product updated successfully', {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        toast.error(action.payload);
       });
   },
 });

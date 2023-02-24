@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import AddProduct from './pages/addProduct/AddProduct';
 import Cookies from 'js-cookie';
 import { setLogin } from './redux/features/auth/authSlice';
+import ProductDetails from './components/product/productDetails/ProductDetails';
+import EditProduct from './components/product/editProduct/EditProduct';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 
@@ -68,6 +70,36 @@ function App() {
           />
         ) : (
           <Route path='/products/addproduct' element={<Login />} />
+        )}
+
+        {isLoggedIn === true ? ( //Protecting route
+          <Route
+            path='/products/:id'
+            element={
+              <Layout>
+                <Main>
+                  <ProductDetails />
+                </Main>
+              </Layout>
+            }
+          />
+        ) : (
+          <Route path='/products/:id' element={<Login />} />
+        )}
+
+        {isLoggedIn === true ? ( //Protecting route
+          <Route
+            path='/products/updateproduct/:id'
+            element={
+              <Layout>
+                <Main>
+                  <EditProduct />
+                </Main>
+              </Layout>
+            }
+          />
+        ) : (
+          <Route path='/products/updateproduct/:id' element={<Login />} />
         )}
 
         <Route

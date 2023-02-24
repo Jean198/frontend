@@ -32,6 +32,7 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
+
     if (!email || !password) {
       return toast.error('All fields are required', toastPosition);
     }

@@ -22,7 +22,7 @@ nav h2 {
 
 .logo-container p {
   line-height: 0cm;
-  color: orange;
+  color: yellow;
 }
 
 .logo-container div span {
@@ -65,6 +65,8 @@ nav li {
   background-color: yellow;
   color: black;
   border-radius: 6px;
+  font-weight: 600;
+  letter-spacing: 3px;
 }
 
 .hero-section button:hover {

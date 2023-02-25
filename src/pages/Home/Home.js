@@ -49,7 +49,7 @@ const Home = ({ authToken }) => {
               </Link>
             </li>
 
-            {isLoggedIn && authToken && (
+            {isLoggedIn && (
               <li
                 className='profileInfo'
                 onMouseOver={() => setLogoutHomeUser(true)}
@@ -98,9 +98,11 @@ const Home = ({ authToken }) => {
               business
             </p>
 
-            <button className='btn btn-lg btn-outline-light mt-4'>
-              Try it for free !
-            </button>
+            <Link to='/register'>
+              <button className='btn btn-lg btn-outline-light mt-4'>
+                Try it for free !
+              </button>
+            </Link>
           </div>
           <div className='hero-image col-lg-6'>
             <img src={homeImage} alt='' className='home-image' />

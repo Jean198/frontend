@@ -8,8 +8,10 @@ import {
 } from '../../redux/features/product/productSlice';
 
 import ProductList from '../product/productList/ProductList';
+import useRedirectUsers from '../../customHook/useRedirectUsers';
 
 const Dashboard = () => {
+  useRedirectUsers('/login');
   const dispatch = useDispatch();
   const { isLoggedIn } = useSelector(selectUserInfo);
   const { products, isLoading, isError, message } =

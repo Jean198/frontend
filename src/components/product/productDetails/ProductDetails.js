@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './ProductDetails.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUserInfo } from '../../../redux/features/auth/authSlice';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   getProduct,
   selectProductInfo,
@@ -10,8 +10,10 @@ import {
 import Loader from '../../loader/Loader';
 import { BsBoxArrowInRight } from 'react-icons/bs';
 import DoMPurify from 'dompurify';
+import useRedirectUsers from '../../../customHook/useRedirectUsers';
 
 const ProductDetails = () => {
+  useRedirectUsers('/login');
   const { isLoggedIn } = useSelector(selectUserInfo);
   //const location = useLocation();
   // const navigate = useNavigate();
@@ -44,7 +46,7 @@ const ProductDetails = () => {
     if (isError) {
       console.log(message);
     }
-  }, [isLoggedIn, isError, message, dispatch]);
+  }, [isLoggedIn, isError, message, dispatch, id]);
 
   return (
     <div className='product-details-container'>

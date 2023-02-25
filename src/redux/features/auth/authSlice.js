@@ -1,14 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-let loginStatus = localStorage.getItem('isLoggedIn');
 let userImage = localStorage.getItem('userPhoto');
 let name = localStorage.getItem('name');
 
 try {
-  const isLoggedIn = JSON.parse(loginStatus);
   const userPhoto = JSON.parse(userImage);
   const username = JSON.parse(name);
-  loginStatus = isLoggedIn;
   userImage = userPhoto;
   name = username;
 } catch (err) {
@@ -16,7 +12,7 @@ try {
 }
 
 const initialState = {
-  isLoggedIn: loginStatus ? loginStatus : false,
+  isLoggedIn: false,
   name: name ? name : '',
   user: {
     name: '',
@@ -32,16 +28,12 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setLogin: (state, action) => {
-      state.isLoggedIn = action.payload.isLoggedIn;
-      localStorage.setItem(
-        'isLoggedIn',
-        JSON.stringify(action.payload.isLoggedIn)
-      );
-      //localStorage.setItem('username', JSON.stringify(action.payload.username));
-      localStorage.setItem(
-        'userPhoto',
-        JSON.stringify(action.payload.userPhoto)
-      );
+      state.isLoggedIn = action.payload;
+    },
+
+    setUserImage: (state, action) => {
+      state.user.photo = action.payload;
+      localStorage.setItem('userPhoto', JSON.stringify(action.payload));
     },
 
     setName: (state, action) => {
@@ -60,6 +52,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setLogin, setName, setUser } = authSlice.actions;
+export const { setLogin, setName, setUser, setUserImage } = authSlice.actions;
 export const selectUserInfo = (store) => store.auth;
 export default authSlice.reducer;

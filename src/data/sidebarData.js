@@ -18,11 +18,11 @@ const menu = [
     childrens: [
       {
         title: 'Profile',
-        path: '/profile',
+        path: '/user/profile',
       },
       {
         title: 'Edit Profile',
-        path: '/edit-profile',
+        path: '/user/editprofile',
       },
     ],
   },

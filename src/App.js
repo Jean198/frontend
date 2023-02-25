@@ -17,7 +17,7 @@ import AddProduct from './pages/addProduct/AddProduct';
 import Cookies from 'js-cookie';
 import { setLogin } from './redux/features/auth/authSlice';
 import ProductDetails from './components/product/productDetails/ProductDetails';
-import EditProduct from './components/product/editProduct/EditProduct';
+import EditProduct from './pages/editProduct/EditProduct';
 
 axios.defaults.withCredentials = true; //WithCredentials helps to get credentials from backend
 

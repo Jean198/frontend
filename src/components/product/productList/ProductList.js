@@ -145,7 +145,7 @@ const ProductList = ({ products, isLoading }) => {
                             </Link>
                           </span>
                           <span>
-                            <Link to={``}>
+                            <Link to={`/products/updateproduct/${product._id}`}>
                               <FaEdit
                                 size={20}
                                 color={'green'}

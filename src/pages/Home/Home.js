@@ -32,7 +32,7 @@ const Home = ({ authToken }) => {
           <div className='logo-container'>
             <div>
               <h2>WMS</h2>
-              <span>Warehouse Management System</span>
+              <p>Warehouse Management System</p>
             </div>
           </div>
           <ul>

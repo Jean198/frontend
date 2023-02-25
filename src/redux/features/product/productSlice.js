@@ -19,6 +19,7 @@ const initialState = {
 export const createProduct = createAsyncThunk(
   'products/create',
   async (formData, thunkAPI) => {
+    console.log('This is my test', formData);
     try {
       return await productService.createProduct(formData);
     } catch (error) {
@@ -76,12 +77,12 @@ export const getProduct = createAsyncThunk(
   }
 );
 
-// Update a single product
+// Update product
 export const updateProduct = createAsyncThunk(
   'products/updateProduct',
   async ({ id, formData }, thunkAPI) => {
-    // I am not sending any data
     try {
+      console.log('updateproduct running!', id, formData);
       return await productService.updateProduct(id, formData);
     } catch (error) {
       const message =
@@ -90,6 +91,7 @@ export const updateProduct = createAsyncThunk(
           error.response.data.message) ||
         error.message ||
         error.toString();
+      console.log(message);
       return thunkAPI.rejectWithValue(message);
     }
   }
@@ -256,9 +258,7 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success('Product updated successfully', {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        toast.success('Product updated successfully');
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.isLoading = false;

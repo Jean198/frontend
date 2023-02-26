@@ -37,11 +37,6 @@ function App() {
     logiStatus();
   }, [dispatch, isLoggedIn]);
 
-  const authToken = Cookies.get('token');
-  if (!authToken) {
-    dispatch(setLogin(false));
-  }
-
   return (
     <BrowserRouter>
       <ToastContainer />

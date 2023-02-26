@@ -33,7 +33,7 @@ function App() {
   useEffect(() => {
     async function logiStatus() {
       const status = await getLoginStatus();
-      await dispatch(setLogin(status));
+      //await dispatch(setLogin(status));
     }
 
     logiStatus();

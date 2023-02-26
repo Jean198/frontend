@@ -67,21 +67,19 @@ const EditProfile = () => {
         const imgData = await response.json();
         console.log(imgData);
         imageURL = imgData.url.toString();
-
-        // Save Profile
-        const formData = {
-          name: profile.name,
-          phone: profile.phone,
-          bio: profile.bio,
-          photo: profileImage ? imageURL : profile.photo,
-        };
-
-        const data = await updateUser(formData);
-        console.log(data);
-        toast.success('User updated');
-        navigate('/user/profile');
-        setIsLoading(false);
       }
+      // Save Profile
+      const formData = {
+        name: profile.name,
+        phone: profile.phone,
+        bio: profile.bio,
+        photo: profileImage ? imageURL : profile.photo,
+      };
+      const data = await updateUser(formData);
+      console.log(data);
+      toast.success('User updated');
+      navigate('/user/profile');
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -91,12 +89,12 @@ const EditProfile = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      <div className='edit-profile-container'>
-        <div className='user-image-container'>
+      <div className='edit-profile-container row'>
+        <div className='user-image-container col-lg-4'>
           <img src={profile?.photo} alt='profile' />
         </div>
-        <div>
-          <form className='edit-profile-phone' onSubmit={saveProfile}>
+        <div className='edit-form-container col-lg-8'>
+          <form className='edit-profile-form' onSubmit={saveProfile}>
             <label htmlFor='name'>Name</label> <br />
             <input
               type='text'
@@ -138,7 +136,9 @@ const EditProfile = () => {
             <label htmlFor='image'>Photo</label> <br />
             <input type='file' name='image' onChange={handleImageChange} />
             <br />
-            <button className='btn btn-info'>Save Changes</button>
+            <button className='btn btn-info edit-profile-btn'>
+              Save Changes
+            </button>
           </form>
           <ChangePassword />
         </div>

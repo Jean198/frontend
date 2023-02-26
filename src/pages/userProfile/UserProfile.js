@@ -32,12 +32,11 @@ const UserProfile = () => {
     <>
       {isLoding && <Loader />}
       <div className='profile-container row'>
-        <div className='user-image-container col-lg-6'>
+        <div className='user-image-container col-lg-4'>
           <img src={profile?.photo} alt='' />
-          <hr />
         </div>
 
-        <div className='user-info col-lg-6'>
+        <div className='user-info col-lg-8'>
           <p>
             <span className='props'>Name:</span> {profile?.name}
           </p>

@@ -67,7 +67,7 @@ const Login = () => {
     <>
       <div className='form-container'>
         {isLoading && <Loader />}
-        <div class='auth-form'>
+        <div className='auth-form'>
           <form onSubmit={login}>
             <input
               type='text'
@@ -85,13 +85,13 @@ const Login = () => {
             />
             <button>Login</button>
 
-            <p class='message'>
+            <p className='message'>
               Not registered? <Link to='/register'>Register</Link>
             </p>
-            <p class='message'>
+            <p className='message'>
               Forgot password? <Link to='/forgot'>Click here</Link>
             </p>
-            <p class='message'>
+            <p className='message'>
               Back to <Link to='/'>Homepage</Link>
             </p>
           </form>

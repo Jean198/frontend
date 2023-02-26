@@ -16,7 +16,7 @@ const Dashboard = () => {
   const { products, isLoading, isError, message } =
     useSelector(selectProductInfo);
 
-  useRedirectUsers('/login');
+  useRedirectUsers('/login'); //I should work on this. It works locally but not deployed
 
   useEffect(() => {
     console.log('Is loggedIn From dashboard', isLoggedIn);

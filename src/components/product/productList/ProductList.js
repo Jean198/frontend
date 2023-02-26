@@ -118,7 +118,7 @@ const ProductList = ({ products, isLoading }) => {
                 {currentItems &&
                   currentItems.map((product, index) => {
                     return (
-                      <tr>
+                      <tr key={index}>
                         <td>{index + 1}</td>
                         <td>{product.sku}</td>
                         <td>{product.name}</td>

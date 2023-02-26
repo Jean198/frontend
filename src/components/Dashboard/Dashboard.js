@@ -16,6 +16,8 @@ const Dashboard = () => {
   const { products, isLoading, isError, message } =
     useSelector(selectProductInfo);
 
+  useRedirectUsers('/login');
+
   useEffect(() => {
     console.log('Is loggedIn From dashboard', isLoggedIn);
     if (isLoggedIn === true) {

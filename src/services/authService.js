@@ -130,7 +130,7 @@ export const getLoginStatus = async () => {
       (error.response && error.response.data && error.response.data.message) ||
       error.message ||
       error.toString();
-    toast.error(message);
+    //toast.error(message);
   }
 };
 

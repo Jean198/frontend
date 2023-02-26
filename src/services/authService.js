@@ -76,7 +76,9 @@ export const loginUser = async (userData) => {
 //logout user
 export const logoutUser = async () => {
   try {
-    await axios.get(`${BACKEND_URL}/api/users/logout`);
+    await axios
+      .get(`${BACKEND_URL}/api/users/logout`)
+      .then((response) => console.log(response));
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||

@@ -23,8 +23,6 @@ const Home = ({ authToken }) => {
     navigate('/');
   };
 
-  console.log(authToken);
-
   return (
     <div className='home'>
       <div className='container'>

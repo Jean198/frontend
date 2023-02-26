@@ -11,10 +11,12 @@ const useRedirectUsers = (path) => {
 
   useEffect(() => {
     const redirectUsers = async () => {
-      const isLoggedIn = await getLoginStatus();
-      dispatch(setLogin(isLoggedIn));
+      const loginStatus = await getLoginStatus();
+      dispatch(setLogin(loginStatus));
 
-      if (!isLoggedIn) {
+      console.log('isloggeding from useRedirect:', loginStatus);
+
+      if (!loginStatus) {
         toast.info('Session expired, please login to continue.');
         navigate(path);
         return;

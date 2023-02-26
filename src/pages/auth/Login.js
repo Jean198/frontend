@@ -52,12 +52,15 @@ const Login = () => {
 
     setIsLoading(true);
 
-    const data = await loginUser(userData);
-    await dispatch(setLogin(true));
-    await dispatch(setName(data.name));
-    await dispatch(setUserImage(data.photo));
-    await navigate('/dashboard');
-    setIsLoading(false);
+    try {
+      const data = await loginUser(userData);
+      await dispatch(setLogin(true));
+      await dispatch(setName(data.name));
+      await dispatch(setUserImage(data.photo));
+      await navigate('/dashboard');
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (

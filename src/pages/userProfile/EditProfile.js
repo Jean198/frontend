@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import ChangePassword from '../../components/changePassword/ChangePassword';
 import Loader from '../../components/loader/Loader';
 import { selectUserInfo } from '../../redux/features/auth/authSlice';
 import { updateUser } from '../../services/authService';
@@ -139,6 +140,7 @@ const EditProfile = () => {
             <br />
             <button className='btn btn-info'>Save Changes</button>
           </form>
+          <ChangePassword />
         </div>
       </div>
     </div>

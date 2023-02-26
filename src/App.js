@@ -35,7 +35,7 @@ function App() {
     }
 
     logiStatus();
-  }, [dispatch]);
+  }, [dispatch, isLoggedIn]);
 
   const authToken = Cookies.get('token');
   if (!authToken) {

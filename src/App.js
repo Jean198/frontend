@@ -28,6 +28,8 @@ function App() {
   const { isLoggedIn } = useSelector(selectUserInfo);
   const dispatch = useDispatch();
 
+  console.log('Is loggedIn From App.js', isLoggedIn);
+
   useEffect(() => {
     async function logiStatus() {
       const status = await getLoginStatus();

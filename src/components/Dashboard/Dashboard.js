@@ -18,6 +18,7 @@ const Dashboard = () => {
     useSelector(selectProductInfo);
 
   useEffect(() => {
+    console.log('Is loggedIn From dashboard', isLoggedIn);
     if (isLoggedIn === true) {
       dispatch(getProducts());
     }

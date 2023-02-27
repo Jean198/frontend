@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loader from '../../components/loader/Loader';
+import { setLogin } from '../../redux/features/auth/authSlice';
 import { validateEmail } from '../../services/authService';
 import { registerUser } from '../../services/authService';
 
@@ -18,6 +20,8 @@ const toastPosition = {
 };
 
 const Register = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const { name, email, password, password2 } = formData;
@@ -55,8 +59,16 @@ const Register = () => {
     };
 
     setIsLoading(true);
-    await registerUser(userData);
-    setIsLoading(false);
+    try {
+      const data = await registerUser(userData);
+      // console.log(data);
+      await dispatch(setLogin(true));
+      await dispatch(setLogin(data.name));
+      navigate('/login');
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
